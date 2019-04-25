@@ -40,8 +40,30 @@
   }
 </style>
 
+
 <button></button>
 <script>
+  const divs = document.querySelectorAll('div');
+  const button = document.querySelector('button');
+
+  function logText(e) {
+
+    console.log(this.classList.value);
+    e.stopPropagation(); //stop bubbling it will no longer trigger events on parent on the way up, can use if statements if you just want to run middle etc.
+  }
+
+  divs.forEach(div => div.addEventListener('click', logText, {
+    capture: true //run function on the way down rather than the way up
+    // once: true //listen for a click and unbind itself - same thing as div.removeeventlistener
+
+  }));
+
+  button.addEventListener('click', () => {
+    console.log('CLICKEDDD wahoooo!!!');
+  }, {
+    once: true
+  })
+
 
 </script>
 </body>
